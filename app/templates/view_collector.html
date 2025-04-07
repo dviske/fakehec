@@ -3,7 +3,7 @@
 {% block head %}
 <h1>FakeHEC - {{ current_user.name }}</h1>
 <p>To use your FakeHEC endpoint, point your application to the following details:</p>
-<p><b>Host:</b> <code>https://{{ current_user.name }}.fakehec.dviske.com</code></p>
+<p><b>Host:</b> <code>{{ current_user.name }}.fakehec.dviske.com</code></p>
 <p><b>Token:</b> <code>{{ current_user.token }}</code></p>
 <a href="{{ url_for('main.regenerate') }}" class="btn btn-primary">Regenerate Token</a>
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">
