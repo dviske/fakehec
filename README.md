@@ -36,3 +36,26 @@ SERVER_NAME="fakehec.example.com"
 # Optional for tracking
 SENTRY_DSN="https://xxxx@xxxx.ingest.us.sentry.io/xxxx"
 ```
+
+You can reverse-proxy the software via nginx using the following config:
+```nginx
+server {
+    server_name fakehec.example.com *.fakehec.example.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+
+        # Standard proxy headers
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/fakehec.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/fakehec.example.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+```
