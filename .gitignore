@@ -1,0 +1,12 @@
+__pycache__
+.vscode/
+.venv*/
+venv*
+dist/
+.coverage*
+htmlcov*
+.tox/
+docs/_build/
+*.db
+.env
+.env.local

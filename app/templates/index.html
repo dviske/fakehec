@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h1>Welcome to FakeHEC!</h1>
+<p>FakeHEC is a simple service emulating the Splunk HTTP Event Collector allowing you to quickly setup and debug a collector for your application.</p>
+<p>FakeHEC was developed by <a href="https://github.com/dviske">dviske</a> and the source code is available at <a href="https://github.com/dviske/fakehec">https://github.com/dviske/fakehec</a>.</p>
+<hr />
+<h3>Getting started</h3>
+<p>To get started, please create a collector. A collector has a password associated with it so it cannot be seen by others (though should by no means store sensitive information in FakeHEC) and you will be given a token to pass to your application.</p>
+<p>You can use this form both to create and to sign into your collector.</p>
+<form class="row row-cols-lg-auto g-3 align-items-center" action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="col-12">
+        <div class="input-group">
+            {{ form.name(class="form-control", placeholder="Name") }}
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="input-group">
+            {{ form.password(class="form-control", placeholder="Password") }}
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-check">
+            {{ form.remember_me(class="form-check-input") }}
+            {{ form.remember_me.label(class="form-check-label") }}
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="input-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </div>
+</form>
+<hr />
+<p>FakeHEC is provided for free in good faith. Any attempts at abuse will be met with deletion and IP restrictions.</p>
+{% endblock %}
