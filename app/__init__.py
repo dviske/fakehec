@@ -36,12 +36,14 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     login.init_app(app)
     scheduler.init_app(app)
-    scheduler.start()
-
-    # Register scheduled tasks
-    with app.app_context():
-        from app.tasks import init_scheduler
-        init_scheduler()
+    
+    # Only start the scheduler if we're not in testing mode
+    if not app.config.get('TESTING', False):
+        scheduler.start()
+        # Register scheduled tasks
+        with app.app_context():
+            from app.tasks import init_scheduler
+            init_scheduler()
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
